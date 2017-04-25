@@ -1,27 +1,26 @@
 var path = require('path');
-var webpack = require('webpack');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: './app/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js'
+    filename: 'bundle.js',
+    publicPath: '/'
   },
   module: {
-  	loaders: [
-  	  { test: /\.css$/, 
-  	  	loader: [ 'style-loader', 'css-loader' ]
-  	  },
-  	  { 
-  		test: /\.jsx?$/, 
-  		include: /app/, 
-  		loader: "babel-loader", 
-  		exclude: /node_modules/, 
-  		query: { 
-  		  presets: ["react", "es2015", "es2016"]
-  		}
-  	  }
-  	]
+    rules: [
+      { test: /\.(js)$/, use: 'babel-loader' },
+      { test: /\.css$/, use: [ 'style-loader', 'css-loader' ]}
+    ]
   },
+  devServer: {
+    historyApiFallback: true
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: 'app/index.html'
+    })
+  ],
   devtool: "eval-source-map"
 };
