@@ -4,8 +4,8 @@ var api = require('../utils/api');
 var Link = require('react-router-dom').Link;
 var PropTypes = require('prop-types');
 var PlayerPreview = require('./PlayerPreview');
-function Profile(props){
 
+function Profile(props){
 	var info = props.info;
 	return (
 		<PlayerPreview avatar={info.avatar_url} username={info.login}>
